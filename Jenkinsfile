@@ -10,20 +10,21 @@ pipeline {
         }
 
         stage('Test') {
-    steps {
-        bat 'docker run ev-app pytest'
-    }
+            steps {
+                bat 'docker run ev-app pytest'
+            }
         }
+
         stage('Security Scan') {
-    steps {
-        bat 'docker run ev-app pip install bandit'
-        bat 'docker run ev-app bandit -r .'
-    }
-       }
+            steps {
+                bat 'docker run ev-app bandit -r .'
+            }
+        }
 
         stage('Run Container') {
             steps {
-                bat 'docker run -d -p 5000:5000 ev-app'
+                bat 'docker rm -f ev-container || exit 0'
+                bat 'docker run -d -p 5000:5000 --name ev-container ev-app'
             }
         }
 
