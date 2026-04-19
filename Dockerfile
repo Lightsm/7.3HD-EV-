@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install --no-cache-dir flask pytest
+RUN pip install --no-cache-dir flask pytest bandit
 
 EXPOSE 5000
 
