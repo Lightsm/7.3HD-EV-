@@ -14,13 +14,12 @@ pipeline {
         bat 'docker run ev-app pytest'
     }
         }
-
         stage('Security Scan') {
-            steps {
-                bat 'pip install bandit'
-                bat 'bandit -r .'
-            }
-        }
+    steps {
+        bat 'docker run ev-app pip install bandit'
+        bat 'docker run ev-app bandit -r .'
+    }
+       }
 
         stage('Run Container') {
             steps {
