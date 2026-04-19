@@ -10,9 +10,9 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                bat 'pytest'
-            }
+    steps {
+        bat 'docker run ev-app pytest'
+    }
         }
 
         stage('Security Scan') {
